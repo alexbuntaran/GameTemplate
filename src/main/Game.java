@@ -20,13 +20,11 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-    private ControlsManager cm;
     private WorldManager wm;
     private EntityManager em;
 
     public Game() {
         display = new Display();
-        cm = new ControlsManager();
         wm = new WorldManager();
         em = new EntityManager();
         running = false;
@@ -34,9 +32,9 @@ public class Game implements Runnable {
 
     private void init() {
         display.initialize();
-        display.getFrame().addKeyListener(cm);
-        display.getCanvas().addMouseListener(cm);
-        display.getCanvas().addMouseMotionListener(cm);
+        display.getFrame().addKeyListener(ControlsManager.getInstance());
+        display.getCanvas().addMouseListener(ControlsManager.getInstance());
+        display.getCanvas().addMouseMotionListener(ControlsManager.getInstance());
         display.getCanvas().createBufferStrategy(Constants.NUMBER_OF_BUFFERS);
         bs = display.getCanvas().getBufferStrategy();
     }

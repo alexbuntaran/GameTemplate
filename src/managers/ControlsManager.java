@@ -8,18 +8,42 @@ import java.awt.event.MouseMotionListener;
 
 public class ControlsManager implements KeyListener, MouseListener, MouseMotionListener {
 
-    public static boolean[] keys;
-    public static boolean mousePressed;
-    public static int mouseX;
-    public static int mouseY;
+    private static ControlsManager cm;
 
-    public static boolean latched = true;
+    public static ControlsManager getInstance() {
+        if (cm == null) {
+            cm = new ControlsManager();
+        }
+
+        return cm;
+    }
+
+    private boolean[] keys;
+    private boolean mousePressed;
+    private int mouseX;
+    private int mouseY;
     
     public ControlsManager() {
         keys = new boolean[256];
         mousePressed = false;
         mouseX = 0;
         mouseY = 0;
+    }
+
+    public boolean getKeyPressed(int keyID) {
+        return keys[keyID];
+    }
+
+    public boolean getMousePressed() {
+        return mousePressed;
+    }
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
     }
 
     @Override
@@ -30,7 +54,6 @@ public class ControlsManager implements KeyListener, MouseListener, MouseMotionL
     @Override
     public void keyReleased(KeyEvent e) {
         keys[e.getKeyCode()] = false;
-        latched = true;
     }
 
     @Override
